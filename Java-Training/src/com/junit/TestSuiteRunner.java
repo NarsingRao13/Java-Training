@@ -6,15 +6,16 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
-public class TestRunner {
-	static Logger log = Logger.getLogger(TestRunner.class.getName());
-
+public class TestSuiteRunner {
+	static Logger log = Logger.getRootLogger();
+	
 	public static void main(String[] args) {
 		BasicConfigurator.configure();
-		Result result = JUnitCore.runClasses(TestJUnit.class,ErrorCollectorExample.class);
-		for (Failure failure : result.getFailures()) {
+		Result result = JUnitCore.runClasses(TestFeatureSuite.class);
+		for(Failure failure : result.getFailures()) {
 			log.error(failure.toString());
 		}
-		log.info("Result==" + result.wasSuccessful());
+	
+		log.info(result.wasSuccessful());
 	}
 }
